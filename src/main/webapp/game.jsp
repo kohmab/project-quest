@@ -16,11 +16,11 @@
 
 <div>
     <div id="questionText">
-        ${question}
+        ${requestScope.question}
     </div>
     <div id="actions">
         <form action="/quest" method="POST">
-            <c:forEach var="entry" items="${nextKeysAndActions}">
+            <c:forEach var="entry" items="${requestScope.nextKeysAndActions}">
                 <button type="submit" name="edgeKey" value="${entry.key}">${entry.value}</button>
             </c:forEach>
             <c:if test="${sessionScope.currentEdgeKey == null}">
