@@ -16,13 +16,13 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class QuestService {
     private final QuestRepository repository;
-    private Integer startEdgeId;
+    private static Integer startEdgeId;
 
-    public QuestTreeEdge getStartEdge(){
+    public Integer getStartEdgeId(){
         if (isNull(startEdgeId)){
             determineStartEdgeId();
         }
-        return repository.getEdgeById(startEdgeId);
+        return startEdgeId;
     }
 
     private  QuestTreeEdge getEdgeById(int id){
