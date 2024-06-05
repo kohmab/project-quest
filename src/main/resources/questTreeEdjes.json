@@ -31,7 +31,7 @@
     "id": 4,
     "action": "Отказаться подниматься на мостик",
     "question": "Ты не пошел на переговоры. Поражение!",
-    "type": "INTERMEDIATE",
+    "type": "LOSE",
     "nextEdgeIds":[]
   },
   {
