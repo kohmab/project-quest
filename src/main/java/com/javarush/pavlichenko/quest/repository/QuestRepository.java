@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.pavlichenko.quest.entity.QuestTreeEdge;
-import com.javarush.pavlichenko.quest.entity.enums.EdgeType;
 import lombok.Getter;
 
 import java.io.*;
@@ -21,7 +20,7 @@ public class QuestRepository {
     @Getter
     private static QuestRepository instance;
 
-    private Map<Integer, QuestTreeEdge> questEdges;
+    private Map<String, QuestTreeEdge> questEdges;
 
     private QuestRepository() {
     }
@@ -40,15 +39,15 @@ public class QuestRepository {
         instance = new QuestRepository();
         instance.questEdges = new HashMap<>();
         for (QuestTreeEdge e : edjesList) {
-            instance.questEdges.put(e.getId(), e);
+            instance.questEdges.put(e.getKey(), e);
         }
     }
 
-    public QuestTreeEdge getEdgeById(int id){
-        return instance.questEdges.get(id);
+    public QuestTreeEdge getEdgeByKey(String key){
+        return instance.questEdges.get(key);
     }
 
-    public Set<Integer> getAllIds(){
+    public Set<String> getAllKeys(){
         return instance.questEdges.keySet();
     }
 
