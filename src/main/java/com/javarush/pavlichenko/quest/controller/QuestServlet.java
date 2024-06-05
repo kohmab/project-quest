@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
 
 import static java.util.Objects.isNull;
@@ -34,21 +33,25 @@ public class QuestServlet extends HttpServlet {
         String receivedEdgeKey = req.getParameter("edgeKey");
 
         Set<String> possibleKeys = questService.getNextKeysAndActions(currentEdgeKey).keySet();
-        if (nonNull(receivedEdgeKey) && possibleKeys.contains(receivedEdgeKey)){
+        if (possibleKeys.contains(receivedEdgeKey)) {
             currentEdgeKey = receivedEdgeKey;
         }
-
-        session.setAttribute("currentEdgeKey",currentEdgeKey);
-        session.setAttribute("isWin", questService.checkWin(currentEdgeKey));
-        session.setAttribute("isLoose", questService.checkLoose(currentEdgeKey));
 
         req.setAttribute("question", questService.getQuestion(currentEdgeKey));
         req.setAttribute("nextKeysAndActions", questService.getNextKeysAndActions(currentEdgeKey));
 
+        if (questService.checkWin(currentEdgeKey)) {
+            session.setAttribute("currentEdgeKey", null);
+        } else if (questService.checkLoose(currentEdgeKey)) {
+            session.setAttribute("currentEdgeKey", null);
+        } else {
+            session.setAttribute("currentEdgeKey", currentEdgeKey);
+        }
+
+
         req.getRequestDispatcher("game.jsp").forward(req, resp);
 
 
-
-        req.getRequestDispatcher("quest").forward(req,resp);
+        req.getRequestDispatcher("quest").forward(req, resp);
     }
 }

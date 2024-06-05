@@ -20,14 +20,15 @@
     </div>
     <div id="actions">
         <form action="/quest" method="POST">
-                <c:forEach var="entry" items="${nextKeysAndActions}">
-                    <button type="submit" name="edgeKey" value="${entry.key}">${entry.value}</button>
-                </c:forEach>
-
-
+            <c:forEach var="entry" items="${nextKeysAndActions}">
+                <button type="submit" name="edgeKey" value="${entry.key}">${entry.value}</button>
+            </c:forEach>
+            <c:if test="${sessionScope.currentEdgeKey == null}">
+                <button type="submit" name="edgeKey">Начать заново</button>
+            </c:if>
         </form>
-
     </div>
 </div>
+
 </body>
 </html>
