@@ -11,6 +11,7 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static java.util.Objects.nonNull;
 
@@ -46,4 +47,9 @@ public class QuestRepository {
     public QuestTreeEdge getEdgeById(int id){
         return instance.questEdges.get(id);
     }
+
+    public Set<Integer> getAllIds(){
+        return instance.questEdges.keySet();
+    }
+
 }
