@@ -1,0 +1,51 @@
+[
+  {
+    "id": 0,
+    "action": "",
+    "question": "Ты потерял память. Принять вызов НЛО?",
+    "type": "INTERMEDIATE",
+    "nextEdgeIds":[1,2]
+  },
+  {
+    "id": 1,
+    "action": "Принять вызов",
+    "question": "Ты принял вызов. Поднимаешься на мостик к капитану?",
+    "type": "INTERMEDIATE",
+    "nextEdgeIds":[3,4]
+  },
+  {
+    "id": 2,
+    "action": "Отклонить вызов",
+    "question": "Ты отклонил вызов. Поражение!",
+    "type": "LOSE",
+    "nextEdgeIds":[]
+  },
+  {
+    "id": 3,
+    "action": "Подняться на мостик",
+    "question": "Ты поднялся на мостик. Кто ты?",
+    "type": "INTERMEDIATE",
+    "nextEdgeIds":[4,5]
+  },
+  {
+    "id": 4,
+    "action": "Отказаться подниматься на мостик",
+    "question": "Ты не пошел на переговоры. Поражение!",
+    "type": "INTERMEDIATE",
+    "nextEdgeIds":[]
+  },
+  {
+    "id": 5,
+    "action": "Рассказать правду о себе",
+    "question": "Тебя вернули домой. Победа!",
+    "type": "WIN",
+    "nextEdgeIds":[]
+  },
+  {
+    "id": 6,
+    "action": "Солгать о себе",
+    "question": "Твою ложь разоблачили. Поражение!",
+    "type": "LOSE",
+    "nextEdgeIds":[]
+  }
+]
