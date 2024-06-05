@@ -2,13 +2,11 @@ package com.javarush.pavlichenko.quest.service;
 
 import com.javarush.pavlichenko.quest.entity.QuestTreeEdge;
 import com.javarush.pavlichenko.quest.entity.enums.EdgeType;
+import com.javarush.pavlichenko.quest.entity.enums.GameState;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
 import lombok.RequiredArgsConstructor;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Map;
-import java.util.List;
+import java.util.*;
 
 
 import static java.util.Objects.isNull;
@@ -20,7 +18,7 @@ public class QuestService {
 
     public String getStartEdgeKey(){
         if (isNull(startEdgeKey)){
-            determineStartEdgeId();
+            determineStartEdgeKey();
         }
         return startEdgeKey;
     }
@@ -33,19 +31,23 @@ public class QuestService {
         return getEdgeByKey(key).getType();
     }
 
+    public boolean checkWin(String key) { return getType(key) == EdgeType.WIN;}
+
+    public boolean checkLoose(String key) { return getType(key) == EdgeType.LOOSE;}
+
     /**
      * @param currentKey id of current edge
-     * @return list containing pairs of edge keys and corresponding actions
+     * @return map containing pairs of edge keys and corresponding actions
      *         which follows the edge with given key
      */
-    public List<Map.Entry<String,String>> getNextIdsAndActions(String currentKey){
+    public Map<String,String> getNextKeysAndActions(String currentKey){
         QuestTreeEdge currentEdge = getEdgeByKey(currentKey);
-        List<Map.Entry<String,String>> result = new ArrayList<>();
+        Map<String,String> result = new HashMap<>();
         for (String nextKey: currentEdge.getNextEdgeKeys()){
             QuestTreeEdge nextEdge = getEdgeByKey(nextKey);
             String key = nextEdge.getKey();
             String action = nextEdge.getAction();
-            result.add(new AbstractMap.SimpleImmutableEntry<>(key, action));
+            result.put(key,action);
         }
         return result;
     }
@@ -54,7 +56,7 @@ public class QuestService {
         return repository.getEdgeByKey(key);
     }
 
-    private void determineStartEdgeId(){
+    private void determineStartEdgeKey(){
         for (String k: repository.getAllKeys()){
             if (repository.getEdgeByKey(k).getType() == EdgeType.START){
                 startEdgeKey = k;

@@ -9,7 +9,7 @@
 </h1>
 <br/>
 <div class="form-container">
-    <form id="nameForm" method="post" action="quest">
+    <form id="nameForm" method="post" action="user">
         <input type="text" class="form-control" id="userName" name="userName" placeholder="Ваше имя" minlength="2" maxlength="10">
         <button type="submit" class="btn btn-primary" id="startButton">Приступить</button>
     </form>

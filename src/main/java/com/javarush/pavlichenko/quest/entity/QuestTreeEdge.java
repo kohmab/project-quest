@@ -14,5 +14,5 @@ public class QuestTreeEdge {
     private String action;
     private String question;
     private EdgeType type;
-    private final List<String> nextEdgeKeys = new ArrayList<>();
+    private List<String> nextEdgeKeys;
 }

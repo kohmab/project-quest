@@ -17,7 +17,7 @@
     "key": "2",
     "action": "Отклонить вызов",
     "question": "Ты отклонил вызов. Поражение!",
-    "type": "LOSE",
+    "type": "LOOSE",
     "nextEdgeKeys":[]
   },
   {
@@ -31,7 +31,7 @@
     "key": "4",
     "action": "Отказаться подниматься на мостик",
     "question": "Ты не пошел на переговоры. Поражение!",
-    "type": "LOSE",
+    "type": "LOOSE",
     "nextEdgeKeys":[]
   },
   {
@@ -45,7 +45,7 @@
     "key": "6",
     "action": "Солгать о себе",
     "question": "Твою ложь разоблачили. Поражение!",
-    "type": "LOSE",
+    "type": "LOOSE",
     "nextEdgeKeys":[]
   }
 ]

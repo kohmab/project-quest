@@ -9,7 +9,7 @@ import java.io.IOException;
 
 import static java.util.Objects.isNull;
 
-@WebServlet(name="user",value="/user")
+@WebServlet(name = "user", value = "/user")
 public class UserServlet extends HttpServlet {
 
     private final static String ANONIMOUS_USER_NAME = "Аноним";
@@ -21,13 +21,11 @@ public class UserServlet extends HttpServlet {
         if (isNull(userName) || userName.trim().isEmpty())
             userName = ANONIMOUS_USER_NAME;
 
-        req.getSession().setAttribute("userName",userName);
+        
 
-        try {
-            resp.sendRedirect("quest");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        req.getSession().setAttribute("userName", userName);
+
+        req.getRequestDispatcher("quest").forward(req, resp);
 
     }
 
