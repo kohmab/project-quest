@@ -10,9 +10,9 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 public class QuestTreeEdge {
-    private int id;
+    private String key;
     private String action;
     private String question;
     private EdgeType type;
-    private List<Integer> nextEdgeIds = new ArrayList<>();
+    private final List<String> nextEdgeKeys = new ArrayList<>();
 }
