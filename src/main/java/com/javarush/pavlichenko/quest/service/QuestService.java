@@ -25,10 +25,6 @@ public class QuestService {
         return startEdgeId;
     }
 
-    private  QuestTreeEdge getEdgeById(int id){
-        return repository.getEdgeById(id);
-    }
-
     public String getQuestion(int id){
         return getEdgeById(id).getQuestion();
     }
@@ -36,7 +32,6 @@ public class QuestService {
     public EdgeType getType(int id){
         return getEdgeById(id).getType();
     }
-
 
     /**
      * @param currentId id of current edge
@@ -55,6 +50,9 @@ public class QuestService {
         return result;
     }
 
+    private QuestTreeEdge getEdgeById(int id){
+        return repository.getEdgeById(id);
+    }
 
     private void determineStartEdgeId(){
         for (Integer i: repository.getAllIds()){
