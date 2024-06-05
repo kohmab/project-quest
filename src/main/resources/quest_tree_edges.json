@@ -3,7 +3,7 @@
     "id": 0,
     "action": "",
     "question": "Ты потерял память. Принять вызов НЛО?",
-    "type": "INTERMEDIATE",
+    "type": "START",
     "nextEdgeIds":[1,2]
   },
   {

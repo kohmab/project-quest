@@ -1,17 +1,18 @@
 package com.javarush.pavlichenko.quest.entity;
 
 import com.javarush.pavlichenko.quest.entity.enums.EdgeType;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-@Data
+@NoArgsConstructor
+@Getter
 public class QuestTreeEdge {
-    private final int id;
-    private final String action;
-    private final String question;
-    private final EdgeType type;
-    private final List<Integer> nextEdgeIds = new ArrayList<>();
+    private int id;
+    private String action;
+    private String question;
+    private EdgeType type;
+    private List<Integer> nextEdgeIds = new ArrayList<>();
 }
