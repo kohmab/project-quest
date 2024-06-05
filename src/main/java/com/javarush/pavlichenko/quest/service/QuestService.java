@@ -43,8 +43,8 @@ public class QuestService {
         List<Map.Entry<Integer,String>> result = new ArrayList<>();
         for (int nextId: currentEdge.getNextEdgeIds()){
             QuestTreeEdge nextEdge = getEdgeById(nextId);
-            final Integer id = nextEdge.getId();
-            final String action = nextEdge.getAction();
+            Integer id = nextEdge.getId();
+            String action = nextEdge.getAction();
             result.add(new AbstractMap.SimpleImmutableEntry<>(id, action));
         }
         return result;
