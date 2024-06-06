@@ -8,29 +8,38 @@
 </head>
 <body>
 
-<div>
-    <div id="questionText">
-        ${requestScope.question}
-    </div>
-    <div id="controls">
-        <form action="quest" method="POST">
+<form class="container-sm text-center" action="quest" method="POST">
+        <div class="row">
+            <div class="col">
+                <p class="h1 text-center">${requestScope.question}</p>
+            </div>
+        </div>
+
+        <div class="row">
             <c:forEach var="entry" items="${requestScope.nextKeysAndActions}">
-                <button type="submit" name="edgeKey" value="${entry.key}">${entry.value}</button>
+                <div class="col">
+                    <button class="btn btn-warning" type="submit" name="edgeKey"
+                            value="${entry.key}">${entry.value}</button>
+                </div>
             </c:forEach>
             <c:if test="${sessionScope.currentEdgeKey == null}">
-                <button type="submit" name="edgeKey">Начать заново</button>
+                <div class="col">
+                    <button class="btn btn-danger" type="submit" name="edgeKey">Начать заново</button>
+                </div>
             </c:if>
-        </form>
-    </div>
-    <div id="stats">
-        User name : ${sessionScope.user.name}<br>
-        games Won : ${sessionScope.user.gamesWon}<br>
-        games Played : ${sessionScope.user.gamesPlayed}<br>
-        <form action="reset" method="get">
-            <button type="submit" class="btn btn-primary" id="startButton">Сброс</button>
-        </form>
 
-    </div>
+        </div>
+</form>
+
+<div id="stats">
+    User name : ${sessionScope.user.name}<br>
+    games Won : ${sessionScope.user.gamesWon}<br>
+    games Played : ${sessionScope.user.gamesPlayed}<br>
+    <form action="reset" method="get">
+        <button type="submit" class="btn btn-primary" id="startButton">Сброс</button>
+    </form>
+
+</div>
 
 </div>
 
