@@ -2,7 +2,6 @@ package com.javarush.pavlichenko.quest.service;
 
 import com.javarush.pavlichenko.quest.entity.QuestTreeEdge;
 import com.javarush.pavlichenko.quest.entity.enums.EdgeType;
-import com.javarush.pavlichenko.quest.entity.enums.GameState;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -36,7 +35,7 @@ public class QuestService {
     public boolean checkLoose(String key) { return getType(key) == EdgeType.LOOSE;}
 
     /**
-     * @param currentKey id of current edge
+     * @param currentKey key of current edge
      * @return map containing pairs of edge keys and corresponding actions
      *         which follows the edge with given key
      */

@@ -15,7 +15,7 @@ import java.util.Set;
 import static java.util.Objects.nonNull;
 
 public class QuestRepository {
-    private static final String QUEST_FILE = "quest_tree_edges.json";
+    private static final String QUEST_FILE = "json/quest_tree_edges.json";
 
     @Getter
     private static QuestRepository instance;
