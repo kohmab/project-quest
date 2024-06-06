@@ -4,6 +4,62 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
 
+
+    <!--String Parameters-->
+    <context-param>
+        <param-name>title</param-name>
+        <param-value>Simple text quest</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>userNamePlaceholder</param-name>
+        <param-value>Your name</param-value>
+    </context-param>
+    <context-param>
+        <param-name>anonymousUserName</param-name>
+        <param-value>Nameless</param-value>
+    </context-param>
+
+    <!--Buttons-->
+    <context-param>
+        <param-name>startButtonCaption</param-name>
+        <param-value>Start</param-value>
+    </context-param>
+
+     <context-param>
+        <param-name>restartButtonCaption</param-name>
+        <param-value>Restart</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>resetButtonCaption</param-name>
+        <param-value>Reset</param-value>
+    </context-param>
+
+    <!--Session info-->
+    <context-param>
+        <param-name>sessionInfoCaption</param-name>
+        <param-value>Current session</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>sessionInfoUserUsernameCaption</param-name>
+        <param-value>User name</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>sessionInfoGamesWonCaption</param-name>
+        <param-value>Win count</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>sessionInfoGamesPlayedCaption</param-name>
+        <param-value>Games played</param-value>
+    </context-param>
+
+
+
+    <!--Filtering -->
     <filter>
         <filter-name>emptyUserFilter</filter-name>
         <filter-class>com.javarush.pavlichenko.quest.controller.EmptyUserFiler</filter-class>
@@ -13,4 +69,9 @@
         <filter-name>emptyUserFilter</filter-name>
         <url-pattern>/game.jsp</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>emptyUserFilter</filter-name>
+        <url-pattern>/quest</url-pattern>
+    </filter-mapping>
+
 </web-app>
