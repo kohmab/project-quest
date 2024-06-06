@@ -32,7 +32,7 @@ public class QuestService {
 
     public boolean checkWin(String key) { return getType(key) == EdgeType.WIN;}
 
-    public boolean checkLoose(String key) { return getType(key) == EdgeType.LOOSE;}
+    public boolean checkDefeat(String key) { return getType(key) == EdgeType.DEFEAT;}
 
     /**
      * @param currentKey key of current edge

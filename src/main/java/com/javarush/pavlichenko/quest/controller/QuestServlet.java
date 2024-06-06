@@ -1,10 +1,10 @@
 package com.javarush.pavlichenko.quest.controller;
 
 import com.javarush.pavlichenko.quest.entity.User;
+import com.javarush.pavlichenko.quest.entity.enums.UserState;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
 import com.javarush.pavlichenko.quest.service.QuestService;
 
-import javax.jws.soap.SOAPBinding;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,11 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
 import java.util.Set;
 
 import static java.util.Objects.isNull;
-import static java.util.Objects.nonNull;
 
 @WebServlet(name = "questServlet", value = "/quest")
 public class QuestServlet extends HttpServlet {
@@ -27,12 +25,14 @@ public class QuestServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
+        User user = (User) session.getAttribute("user");
 
-        String currentEdgeKey = (String) session.getAttribute("currentEdgeKey");
-        if (isNull(currentEdgeKey)) {
-            currentEdgeKey = questService.getStartEdgeKey();
+        if (user.getState() == UserState.DEFEAT || user.getState() == UserState.WIN) {
+            String startEdgeKey = questService.getStartEdgeKey();
+            user.beginQuest(startEdgeKey);
         }
 
+        String currentEdgeKey = user.getEdgeKey();
         String receivedEdgeKey = req.getParameter("edgeKey");
 
         Set<String> possibleKeys = questService.getNextKeysAndActions(currentEdgeKey).keySet();
@@ -45,15 +45,11 @@ public class QuestServlet extends HttpServlet {
 
 
         if (questService.checkWin(currentEdgeKey)) {
-            session.setAttribute("currentEdgeKey", null);
-            User user = (User) session.getAttribute("user");
             user.win();
-        } else if (questService.checkLoose(currentEdgeKey)) {
-            session.setAttribute("currentEdgeKey", null);
-            User user = (User) session.getAttribute("user");
-            user.loose();
+        } else if (questService.checkDefeat(currentEdgeKey)) {
+            user.defeat();
         } else {
-            session.setAttribute("currentEdgeKey", currentEdgeKey);
+            user.setEdgeKey(currentEdgeKey);
         }
 
         req.getRequestDispatcher("game.jsp").forward(req, resp);

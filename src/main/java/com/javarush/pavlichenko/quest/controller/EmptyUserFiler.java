@@ -12,12 +12,14 @@ import static java.util.Objects.isNull;
 public class EmptyUserFiler implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        //TODO could args be null?
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession();
         if (isNull(session.getAttribute("user"))){
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.sendRedirect("reset");
         }
+
         chain.doFilter(request,response);
     }
 }
