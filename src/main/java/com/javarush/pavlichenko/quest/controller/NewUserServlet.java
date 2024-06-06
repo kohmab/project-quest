@@ -15,8 +15,6 @@ import static java.util.Objects.isNull;
 @WebServlet(name = "newUser", value = "/newUser")
 public class NewUserServlet extends HttpServlet {
 
-    private final static String ANONIMOUS_USER_NAME = "Аноним";
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
@@ -25,7 +23,7 @@ public class NewUserServlet extends HttpServlet {
             String userName = req.getParameter("userName");
 
             if (isNull(userName) || userName.trim().isEmpty())
-                userName = ANONIMOUS_USER_NAME;
+                userName = getServletContext().getInitParameter("anonymousUserName") ;
 
             req.getSession().setAttribute("user", new User(userName));
         }
