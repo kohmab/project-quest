@@ -4,8 +4,10 @@ import com.javarush.pavlichenko.quest.entity.User;
 import com.javarush.pavlichenko.quest.entity.enums.UserState;
 import com.javarush.pavlichenko.quest.service.QuestService;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,10 +18,11 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Field;
 
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 
+@ExtendWith(MockitoExtension.class)
 class QuestServletTest {
 
     private final QuestServlet questServlet = new QuestServlet();
