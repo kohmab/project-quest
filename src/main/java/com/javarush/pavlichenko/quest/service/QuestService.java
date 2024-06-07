@@ -36,7 +36,7 @@ public class QuestService {
 
     /**
      * @param currentKey key of current node
-     * @return map containing pairs of edge keys and corresponding actions
+     * @return map containing pairs of node keys and corresponding actions
      *         which follows the edge with given key
      */
     public Map<String,String> getNextKeysAndActions(String currentKey){
