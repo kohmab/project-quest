@@ -3,7 +3,7 @@ package com.javarush.pavlichenko.quest.repository;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javarush.pavlichenko.quest.entity.QuestTreeEdge;
+import com.javarush.pavlichenko.quest.entity.QuestNode;
 import lombok.Getter;
 
 import java.io.*;
@@ -15,12 +15,12 @@ import java.util.Set;
 import static java.util.Objects.nonNull;
 
 public class QuestRepository {
-    private static final String QUEST_FILE = "json/quest_tree_edges.json";
+    private static final String QUEST_FILE = "json/quest-tree.json"; //TODO move
 
     @Getter
     private static QuestRepository instance;
 
-    private Map<String, QuestTreeEdge> questEdges;
+    private Map<String, QuestNode> questNodes;
 
     private QuestRepository() {
     }
@@ -30,25 +30,25 @@ public class QuestRepository {
             return;
 
         ObjectMapper mapper = new ObjectMapper(new JsonFactory());
-        List<QuestTreeEdge> edjesList;
+        List<QuestNode> NodesList;
         try (InputStream ioStream = QuestRepository.class.getClassLoader().getResourceAsStream(QUEST_FILE)) {
-            edjesList = mapper.readValue(ioStream, new TypeReference<List<QuestTreeEdge>>() {
+            NodesList = mapper.readValue(ioStream, new TypeReference<List<QuestNode>>() {
             });
         }
 
         instance = new QuestRepository();
-        instance.questEdges = new HashMap<>();
-        for (QuestTreeEdge e : edjesList) {
-            instance.questEdges.put(e.getKey(), e);
+        instance.questNodes = new HashMap<>();
+        for (QuestNode node : NodesList) {
+            instance.questNodes.put(node.getKey(), node);
         }
     }
 
-    public QuestTreeEdge getEdgeByKey(String key){
-        return instance.questEdges.get(key);
+    public QuestNode getNodeByKey(String key){
+        return instance.questNodes.get(key);
     }
 
     public Set<String> getAllKeys(){
-        return instance.questEdges.keySet();
+        return instance.questNodes.keySet();
     }
 
 }

@@ -2,9 +2,9 @@
   {
     "key": "0",
     "action": "",
-    "question": "Ты потерял память. Принять вызов НЛО?",
+    "consequence": "Ты потерял память. Принять вызов НЛО?",
     "type": "START",
-    "nextEdgeKeys": [
+    "nextNodeKeys": [
       "1",
       "2"
     ]
@@ -12,9 +12,9 @@
   {
     "key": "1",
     "action": "Принять вызов",
-    "question": "Ты принял вызов. Поднимаешься на мостик к капитану?",
+    "consequence": "Ты принял вызов. Поднимаешься на мостик к капитану?",
     "type": "INTERMEDIATE",
-    "nextEdgeKeys": [
+    "nextNodeKeys": [
       "3",
       "4"
     ]
@@ -22,16 +22,16 @@
   {
     "key": "2",
     "action": "Отклонить вызов",
-    "question": "Ты отклонил вызов. Поражение!",
+    "consequence": "Ты отклонил вызов. Поражение!",
     "type": "DEFEAT",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   },
   {
     "key": "3",
     "action": "Подняться на мостик",
-    "question": "Ты поднялся на мостик. Кто ты?",
+    "consequence": "Ты поднялся на мостик. Кто ты?",
     "type": "INTERMEDIATE",
-    "nextEdgeKeys": [
+    "nextNodeKeys": [
       "5",
       "6"
     ]
@@ -39,23 +39,23 @@
   {
     "key": "4",
     "action": "Отказаться подниматься на мостик",
-    "question": "Ты не пошел на переговоры. Поражение!",
+    "consequence": "Ты не пошел на переговоры. Поражение!",
     "type": "DEFEAT",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   },
   {
     "key": "5",
     "action": "Рассказать правду о себе",
-    "question": "Тебя вернули домой. Победа!",
+    "consequence": "Тебя вернули домой. Победа!",
     "type": "WIN",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   },
   {
     "key": "6",
     "action": "Солгать о себе",
-    "question": "Твою ложь разоблачили.",
+    "consequence": "Твою ложь разоблачили.",
     "type": "INTERMEDIATE",
-    "nextEdgeKeys": [
+    "nextNodeKeys": [
       "7",
       "8",
       "9"
@@ -64,22 +64,22 @@
   {
     "key": "7",
     "action": "Начать неравный бой с инопланетными монстрами.",
-    "question": "Их тентакли слишком мощны и быстры. Поражение!",
+    "consequence": "Их тентакли слишком мощны и быстры. Поражение!",
     "type": "DEFEAT",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   },
   {
     "key": "8",
     "action": "Попытаться выхватить золотой наградной бластер боцмана и начать отстреливаться.",
-    "question": "Боцман оказался крепкий... Поражение!",
+    "consequence": "Боцман оказался крепкий... Поражение!",
     "type": "DEFEAT",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   },
   {
     "key": "9",
     "action": "Выпрыгнуть в форточку.",
-    "question": "Эм... Вокруг космос. Ты на что рассчитывал? Поражение!",
+    "consequence": "Эм... Вокруг космос. Ты на что рассчитывал? Поражение!",
     "type": "DEFEAT",
-    "nextEdgeKeys": []
+    "nextNodeKeys": []
   }
 ]

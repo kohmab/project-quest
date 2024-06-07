@@ -20,27 +20,27 @@
 <form class="container-sm" action="quest" method="POST">
     <div class="row">
         <div class="col">
-            <p class="h1 ">${requestScope.question}</p>
+            <p class="h1 ">${requestScope.consequence}</p>
         </div>
     </div>
 
     <div class="row">
         <c:forEach var="entry" items="${requestScope.nextKeysAndActions}">
 
-            <button class="col m-3 btn btn-warning" type="submit" name="edgeKey"
+            <button class="col m-3 btn btn-warning" type="submit" name="nodeKey"
                     value="${entry.key}">${entry.value}</button>
 
         </c:forEach>
         <c:if test="${sessionScope.user.state.name == 'win'}">
             <div class="col">
                 <button class="btn btn-success m-3" type="submit"
-                        name="edgeKey">${initParam['restartButtonCaption']}</button>
+                        name="">${initParam['restartButtonCaption']}</button>
             </div>
         </c:if>
         <c:if test="${sessionScope.user.state.name == 'defeat'}">
             <div class="col">
                 <button class="btn btn-danger m-3" type="submit"
-                        name="edgeKey">${initParam['restartButtonCaption']}</button>
+                        name="">${initParam['restartButtonCaption']}</button>
             </div>
         </c:if>
     </div>

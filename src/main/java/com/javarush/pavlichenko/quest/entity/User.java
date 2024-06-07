@@ -13,7 +13,7 @@ public class User {
     private final String name;
 
     @Setter
-    private String edgeKey;
+    private String nodeKey;
 
     private UserState state = UserState.WIN; // we are all born winners
     private int gamesPlayed = 0;
@@ -31,8 +31,8 @@ public class User {
         state = UserState.DEFEAT;
     }
 
-    public void beginQuest(String startEdgeKey){
-        edgeKey = startEdgeKey;
+    public void beginQuest(String startNodeKey){
+        nodeKey = startNodeKey;
         state = UserState.PLAY;
     }
 

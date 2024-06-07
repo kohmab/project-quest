@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Set;
 
-import static java.util.Objects.isNull;
-
 @WebServlet(name = "questServlet", value = "/quest")
 public class QuestServlet extends HttpServlet {
 
@@ -28,28 +26,28 @@ public class QuestServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user.getState() == UserState.DEFEAT || user.getState() == UserState.WIN) {
-            String startEdgeKey = questService.getStartEdgeKey();
-            user.beginQuest(startEdgeKey);
+            String startNodeKey = questService.getStartNodeKey();
+            user.beginQuest(startNodeKey);
         }
 
-        String currentEdgeKey = user.getEdgeKey();
-        String receivedEdgeKey = req.getParameter("edgeKey");
+        String currentNodeKey = user.getNodeKey();
+        String receivedNodeKey = req.getParameter("nodeKey");
 
-        Set<String> possibleKeys = questService.getNextKeysAndActions(currentEdgeKey).keySet();
-        if (possibleKeys.contains(receivedEdgeKey)) {
-            currentEdgeKey = receivedEdgeKey;
+        Set<String> possibleKeys = questService.getNextKeysAndActions(currentNodeKey).keySet();
+        if (possibleKeys.contains(receivedNodeKey)) {
+            currentNodeKey = receivedNodeKey;
         }
 
-        req.setAttribute("question", questService.getQuestion(currentEdgeKey));
-        req.setAttribute("nextKeysAndActions", questService.getNextKeysAndActions(currentEdgeKey));
+        req.setAttribute("consequence", questService.getQuestion(currentNodeKey));
+        req.setAttribute("nextKeysAndActions", questService.getNextKeysAndActions(currentNodeKey));
 
 
-        if (questService.checkWin(currentEdgeKey)) {
+        if (questService.checkWin(currentNodeKey)) {
             user.win();
-        } else if (questService.checkDefeat(currentEdgeKey)) {
+        } else if (questService.checkDefeat(currentNodeKey)) {
             user.defeat();
         } else {
-            user.setEdgeKey(currentEdgeKey);
+            user.setNodeKey(currentNodeKey);
         }
 
         req.getRequestDispatcher("game.jsp").forward(req, resp);

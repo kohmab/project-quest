@@ -1,7 +1,7 @@
 package com.javarush.pavlichenko.quest.service;
 
-import com.javarush.pavlichenko.quest.entity.QuestTreeEdge;
-import com.javarush.pavlichenko.quest.entity.enums.EdgeType;
+import com.javarush.pavlichenko.quest.entity.QuestNode;
+import com.javarush.pavlichenko.quest.entity.enums.QuestNodeType;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -13,26 +13,26 @@ import static java.util.Objects.isNull;
 @RequiredArgsConstructor
 public class QuestService {
     private final QuestRepository repository;
-    private static String startEdgeKey;
+    private String startNodeKey;
 
-    public String getStartEdgeKey(){
-        if (isNull(startEdgeKey)){
-            determineStartEdgeKey();
+    public String getStartNodeKey(){
+        if (isNull(startNodeKey)){
+            determineStartNodeKey();
         }
-        return startEdgeKey;
+        return startNodeKey;
     }
 
     public String getQuestion(String key){
-        return getEdgeByKey(key).getQuestion();
+        return getNodeByKey(key).getConsequence();
     }
 
-    public EdgeType getType(String key){
-        return getEdgeByKey(key).getType();
+    public QuestNodeType getType(String key){
+        return getNodeByKey(key).getType();
     }
 
-    public boolean checkWin(String key) { return getType(key) == EdgeType.WIN;}
+    public boolean checkWin(String key) { return getType(key) == QuestNodeType.WIN;}
 
-    public boolean checkDefeat(String key) { return getType(key) == EdgeType.DEFEAT;}
+    public boolean checkDefeat(String key) { return getType(key) == QuestNodeType.DEFEAT;}
 
     /**
      * @param currentKey key of current edge
@@ -40,25 +40,25 @@ public class QuestService {
      *         which follows the edge with given key
      */
     public Map<String,String> getNextKeysAndActions(String currentKey){
-        QuestTreeEdge currentEdge = getEdgeByKey(currentKey);
+        QuestNode currentNode = getNodeByKey(currentKey);
         Map<String,String> result = new HashMap<>();
-        for (String nextKey: currentEdge.getNextEdgeKeys()){
-            QuestTreeEdge nextEdge = getEdgeByKey(nextKey);
-            String key = nextEdge.getKey();
-            String action = nextEdge.getAction();
+        for (String nextNodeKey: currentNode.getNextNodeKeys()){
+            QuestNode next = getNodeByKey(nextNodeKey);
+            String key = next.getKey();
+            String action = next.getAction();
             result.put(key,action);
         }
         return result;
     }
 
-    private QuestTreeEdge getEdgeByKey(String key){
-        return repository.getEdgeByKey(key);
+    private QuestNode getNodeByKey(String key){
+        return repository.getNodeByKey(key);
     }
 
-    private void determineStartEdgeKey(){
+    private void determineStartNodeKey(){
         for (String k: repository.getAllKeys()){
-            if (repository.getEdgeByKey(k).getType() == EdgeType.START){
-                startEdgeKey = k;
+            if (repository.getNodeByKey(k).getType() == QuestNodeType.START){
+                startNodeKey = k;
                 return;
             }
         }

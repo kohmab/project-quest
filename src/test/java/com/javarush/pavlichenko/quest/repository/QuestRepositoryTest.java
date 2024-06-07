@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class QuestRepositoryTest {
 
+
+
     @Test
     void getEdgeById() {
     }

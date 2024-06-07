@@ -1,6 +1,6 @@
 package com.javarush.pavlichenko.quest.entity.enums;
 
-public enum EdgeType {
+public enum QuestNodeType {
     START,
     INTERMEDIATE,
     DEFEAT,
