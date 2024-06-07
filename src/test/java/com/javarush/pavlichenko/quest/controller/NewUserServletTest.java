@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,7 +27,7 @@ class NewUserServletTest {
     private final HttpServletRequest request = Mockito.mock(HttpServletRequest.class);
     private final HttpServletResponse response = Mockito.mock(HttpServletResponse.class);
     private final ServletConfig servletConfig = Mockito.mock(ServletConfig.class);
-    private final ServletContext servletContext  = Mockito.mock(ServletContext.class);
+    private final ServletContext servletContext = Mockito.mock(ServletContext.class);
     private final HttpSession session = Mockito.mock(HttpSession.class);
     private final User user = Mockito.mock(User.class);
     private final RequestDispatcher requestDispatcher = Mockito.mock(RequestDispatcher.class);
@@ -61,45 +60,41 @@ class NewUserServletTest {
     @Test
     void createIfNoUser() throws ServletException, IOException {
         Mockito.doReturn(null).when(session).getAttribute("user");
-        try (MockedConstruction<User> userMockedConstruction = Mockito.mockConstruction(User.class)){
+        try (MockedConstruction<User> userMockedConstruction = Mockito.mockConstruction(User.class)) {
             newUserServlet.doPost(request, response);
-            assertEquals(1,userMockedConstruction.constructed().size());
+            assertEquals(1, userMockedConstruction.constructed().size());
         }
     }
 
     @Test
     void doNotCreateIfPresent() throws ServletException, IOException {
         Mockito.doReturn(user).when(session).getAttribute("user");
-        try (MockedConstruction<User> userMockedConstruction = Mockito.mockConstruction(User.class)){
+        try (MockedConstruction<User> userMockedConstruction = Mockito.mockConstruction(User.class)) {
             newUserServlet.doPost(request, response);
-            assertEquals(0,userMockedConstruction.constructed().size());
+            assertEquals(0, userMockedConstruction.constructed().size());
         }
     }
 
     @Test
     void anonymousUserCreationWhenNullNameInRequest() throws ServletException, IOException {
         Mockito.doReturn(null).when(request).getParameter("userName");
-        Object anonymousUserName = newUserServlet.getServletContext().getInitParameter("anonymousUserName");
 
         try (MockedConstruction<User> userMockedConstruction =
                      Mockito.mockConstruction(
                              User.class,
-                             (mock, context) -> {
-            assertEquals("anonymousUserName", context.arguments().get(0));}))
-            {
+                             (mock, context) -> assertEquals("anonymousUserName", context.arguments().get(0)))) {
             newUserServlet.doPost(request, response);
         }
     }
+
     @ParameterizedTest
-    @ValueSource(strings = { "", " ", "\n","\t","\t\n","\t\t\t   \t\t\n" })
+    @ValueSource(strings = {"", " ", "\n", "\t", "\t\n", "\t\t\t   \t\t\n"})
     void anonymousUserCreationWhenBlankNameInRequest(String val) throws ServletException, IOException {
         Mockito.doReturn(val).when(request).getParameter("userName");
         try (MockedConstruction<User> userMockedConstruction =
                      Mockito.mockConstruction(
                              User.class,
-                             (mock, context) -> {
-                                 assertEquals("anonymousUserName", context.arguments().get(0));}))
-        {
+                             (mock, context) -> assertEquals("anonymousUserName", context.arguments().get(0)))) {
             newUserServlet.doPost(request, response);
         }
     }
