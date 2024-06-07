@@ -8,7 +8,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="d-flex align-items-center justify-content-center vh-100 text-center p-3">
-
 <form class="input-group fixed-top m-3" action="reset" method="get">
     <span class="input-group-text text-primary">${initParam['sessionInfoCaption']}</span>
     <span class="input-group-text">${initParam['sessionInfoUserUsernameCaption']} : ${sessionScope.user.name}</span>
@@ -27,20 +26,20 @@
 
     <div class="row">
         <c:forEach var="entry" items="${requestScope.nextKeysAndActions}">
-            <div class="col">
-                <button class="btn btn-warning" type="submit" name="edgeKey"
-                        value="${entry.key}">${entry.value}</button>
-            </div>
+
+            <button class="col m-3 btn btn-warning" type="submit" name="edgeKey"
+                    value="${entry.key}">${entry.value}</button>
+
         </c:forEach>
         <c:if test="${sessionScope.user.state.name == 'win'}">
             <div class="col">
-                <button class="btn btn-success" type="submit"
+                <button class="btn btn-success m-3" type="submit"
                         name="edgeKey">${initParam['restartButtonCaption']}</button>
             </div>
         </c:if>
         <c:if test="${sessionScope.user.state.name == 'defeat'}">
             <div class="col">
-                <button class="btn btn-danger" type="submit"
+                <button class="btn btn-danger m-3" type="submit"
                         name="edgeKey">${initParam['restartButtonCaption']}</button>
             </div>
         </c:if>

@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="row justify-content-md-center">
-        <div class="col col-3">
+        <div class="col col-3 m-3">
             <form class="input-group " method="post" action="newUser">
                 <input type="text" class="form-control" name="userName"
                        placeholder="${initParam['userNamePlaceholder']}"
