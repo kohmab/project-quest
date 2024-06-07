@@ -35,7 +35,7 @@ public class QuestService {
     public boolean checkDefeat(String key) { return getType(key) == QuestNodeType.DEFEAT;}
 
     /**
-     * @param currentKey key of current edge
+     * @param currentKey key of current node
      * @return map containing pairs of edge keys and corresponding actions
      *         which follows the edge with given key
      */
