@@ -44,9 +44,8 @@ public class QuestService {
         Map<String,String> result = new HashMap<>();
         for (String nextNodeKey: currentNode.getNextNodeKeys()){
             QuestNode next = getNodeByKey(nextNodeKey);
-            String key = next.getKey();
-            String action = next.getAction();
-            result.put(key,action);
+            String nextNodeaction = next.getAction();
+            result.put(nextNodeKey,nextNodeaction);
         }
         return result;
     }

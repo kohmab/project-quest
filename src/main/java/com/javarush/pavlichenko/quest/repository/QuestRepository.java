@@ -30,17 +30,13 @@ public class QuestRepository {
             return;
 
         ObjectMapper mapper = new ObjectMapper(new JsonFactory());
-        List<QuestNode> NodesList;
+        instance = new QuestRepository();
+
         try (InputStream ioStream = QuestRepository.class.getClassLoader().getResourceAsStream(QUEST_FILE)) {
-            NodesList = mapper.readValue(ioStream, new TypeReference<List<QuestNode>>() {
+            instance.questNodes = mapper.readValue(ioStream, new TypeReference<Map<String,QuestNode>>() {
             });
         }
 
-        instance = new QuestRepository();
-        instance.questNodes = new HashMap<>();
-        for (QuestNode node : NodesList) {
-            instance.questNodes.put(node.getKey(), node);
-        }
     }
 
     public QuestNode getNodeByKey(String key){
