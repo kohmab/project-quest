@@ -38,7 +38,7 @@ public class QuestServlet extends HttpServlet {
             currentNodeKey = receivedNodeKey;
         }
 
-        req.setAttribute("consequence", questService.getQuestion(currentNodeKey));
+        req.setAttribute("consequence", questService.getConsequence(currentNodeKey));
         req.setAttribute("nextKeysAndActions", questService.getNextKeysAndActions(currentNodeKey));
 
 

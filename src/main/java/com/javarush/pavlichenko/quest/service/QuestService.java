@@ -22,7 +22,7 @@ public class QuestService {
         return startNodeKey;
     }
 
-    public String getQuestion(String key){
+    public String getConsequence(String key){
         return getNodeByKey(key).getConsequence();
     }
 
