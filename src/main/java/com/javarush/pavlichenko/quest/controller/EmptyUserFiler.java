@@ -15,11 +15,12 @@ public class EmptyUserFiler implements Filter {
         //TODO could args be null?
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         HttpSession session = httpServletRequest.getSession();
-        if (isNull(session.getAttribute("user"))){
+        if (isNull(session.getAttribute("user"))) {
             HttpServletResponse httpServletResponse = (HttpServletResponse) response;
             httpServletResponse.sendRedirect("reset");
+        } else {
+            chain.doFilter(request, response);
         }
 
-        chain.doFilter(request,response);
     }
 }
