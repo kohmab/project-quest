@@ -34,18 +34,18 @@ class UserTest {
 
     @Test
     void winCount() {
-        int winCount = user.getGamesPlayed();
+        int winCount = user.getGamesWon();
         user.win();
-        int newWinCount = user.getGamesPlayed();
+        int newWinCount = user.getGamesWon();
         assertEquals(winCount + 1, newWinCount);
 
         winCount = newWinCount;
         user.defeat();
-        newWinCount = user.getGamesPlayed();
+        newWinCount = user.getGamesWon();
         assertEquals(winCount, newWinCount);
 
         user.beginQuest("someKey");
-        newWinCount = user.getGamesPlayed();
+        newWinCount = user.getGamesWon();
         assertEquals(winCount, newWinCount);
     }
 

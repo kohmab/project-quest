@@ -1,0 +1,65 @@
+{
+  "start": {
+    "action": "",
+    "consequence": "aaasdfasdf",
+    "type": "START",
+    "nextNodeKeys": [
+      "node1",
+      "defeat"
+    ]
+  },
+  "node1": {
+    "action": "",
+    "consequence": "adfasdfasdfasdf",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": ["win"]
+  },
+  "win": {
+    "action": "",
+    "consequence": "adfasdfasdf",
+    "type": "WIN",
+    "nextNodeKeys": []
+  },
+  "defeat": {
+    "action": "",
+    "consequence": "asdf",
+    "type": "DEFEAT",
+    "nextNodeKeys": []
+  },
+  "keysAndActionsTest": {
+    "action": "",
+    "consequence": "adfasdfasdf",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": ["1","2","3","4","5"]
+  },
+  "1": {
+    "action": "action1",
+    "consequence": "adfasdfasdfasdfasdf",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": []
+  },
+  "2": {
+    "action": "action2",
+    "consequence": "adsfasdfasdq342134gdfghjnvzdsf",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": []
+  },
+  "3": {
+    "action": "action3",
+    "consequence": "112312 sdfdsf asd ads dfs asd fasd fa sdf",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": []
+  },
+  "4": {
+    "action": "action4",
+    "consequence": "                ",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": []
+  },
+  "5": {
+    "action": "action5",
+    "consequence": "!!#@!#!@# ASD ASD AW !@ #AWD",
+    "type": "INTERMEDIATE",
+    "nextNodeKeys": []
+  }
+}
