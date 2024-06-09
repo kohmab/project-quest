@@ -81,7 +81,7 @@ class QuestServiceTest {
     }
 
     @Test
-    void getConcequence() {
+    void getConsequence() {
         for (String key : testQuestMap.keySet()) {
             assertEquals(testQuestMap.get(key).getConsequence(), questService.getConsequence(key));
         }
