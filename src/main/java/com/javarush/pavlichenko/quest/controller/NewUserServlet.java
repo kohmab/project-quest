@@ -18,7 +18,6 @@ public class NewUserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-
         if (isNull(session.getAttribute("user"))) {
             String userName = req.getParameter("userName");
 

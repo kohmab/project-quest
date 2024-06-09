@@ -25,6 +25,7 @@ public class QuestRepository {
     private QuestRepository() {
     }
 
+    // TODO make thread safe
     public static void init() throws IOException {
         if (nonNull(instance))
             return;
