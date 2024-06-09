@@ -3,17 +3,28 @@ package com.javarush.pavlichenko.quest.service;
 import com.javarush.pavlichenko.quest.entity.QuestNode;
 import com.javarush.pavlichenko.quest.entity.enums.QuestNodeType;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
-import lombok.RequiredArgsConstructor;
+import org.cache2k.Cache;
+import org.cache2k.Cache2kBuilder;
 
 import java.util.*;
 
 
 import static java.util.Objects.isNull;
 
-@RequiredArgsConstructor
 public class QuestService {
     private final QuestRepository repository;
+    private final Cache<String,QuestNode> cache;
+
     private String startNodeKey;
+
+    public QuestService(QuestRepository repository) {
+        this.repository = repository;
+        cache = new Cache2kBuilder<String,QuestNode>(){}
+                .name("questNodesCache")
+                .eternal(true)
+                .entryCapacity(100L)
+                .build();
+    }
 
     public String getStartNodeKey(){
         if (isNull(startNodeKey)){
@@ -44,14 +55,17 @@ public class QuestService {
         Map<String,String> result = new HashMap<>();
         for (String nextNodeKey: currentNode.getNextNodeKeys()){
             QuestNode next = getNodeByKey(nextNodeKey);
-            String nextNodeaction = next.getAction();
-            result.put(nextNodeKey,nextNodeaction);
+            String nextNodeAction = next.getAction();
+            result.put(nextNodeKey,nextNodeAction);
         }
         return result;
     }
 
     private QuestNode getNodeByKey(String key){
-        return repository.getNodeByKey(key);
+        if (!cache.containsKey(key)){
+            cache.put(key,repository.getNodeByKey(key));
+        }
+            return cache.get(key);
     }
 
     private void determineStartNodeKey(){
