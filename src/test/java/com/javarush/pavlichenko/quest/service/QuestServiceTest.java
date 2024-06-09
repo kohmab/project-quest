@@ -4,26 +4,19 @@ import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javarush.pavlichenko.quest.entity.QuestNode;
-import com.javarush.pavlichenko.quest.entity.enums.QuestNodeType;
 import com.javarush.pavlichenko.quest.repository.QuestRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.objenesis.ObjenesisException;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
-import static java.util.Objects.isNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -31,7 +24,7 @@ class QuestServiceTest {
 
     // TEST REPOSITORY
     private final static String TEST_QUEST_FILE = "json/test-quest-tree.json";
-    private static QuestRepository questRepository = Mockito.mock(QuestRepository.class);
+    private static final QuestRepository questRepository = Mockito.mock(QuestRepository.class);
     private static Map<String, QuestNode> testQuestMap;
     private static QuestService questService;
 
